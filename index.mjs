@@ -78,9 +78,9 @@ if (process.env.KOJI_URL && process.env.KOJI_SECRET) {
     body: JSON.stringify({ area: featureCollection }),
   })
   if (!response.ok) {
-    console.error('Unable to save to koji', response)
+    console.error('Unable to save to koji', await response.text())
   } else {
-    console.log('Saved to koji')
+    console.log('Saved to koji', await response.json())
   }
 } else {
   fs.writeFileSync('nests.json', JSON.stringify(featureCollection))
