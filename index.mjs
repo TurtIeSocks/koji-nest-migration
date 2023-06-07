@@ -35,7 +35,7 @@ connection.destroy()
 const fc = {
   type: 'FeatureCollection',
   features: results
-    .filter((result) => result.polygon_path || result.polygon)
+    .filter((result) => result.name && (result.polygon_path || result.polygon))
     .map((result) => {
       const { polygon, polygon_path, ...nest } = result
       const feature = {
@@ -64,7 +64,7 @@ const fc = {
 const featureCollection = process.env.COMBINE === 'true' ? combine(fc) : fc
 
 if (process.env.COMBINE === 'true') {
-  featureCollection.features[0].properties.name = 'Nests'
+  featureCollection.features[0].properties.__name = 'Nests'
   featureCollection.features[0].properties.collectedProperties = undefined
 }
 
