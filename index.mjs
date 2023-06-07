@@ -75,7 +75,7 @@ if (process.env.KOJI_URL && process.env.KOJI_SECRET) {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${process.env.KOJI_SECRET}`,
     },
-    body: JSON.stringify({ area: JSON.parse(code) }),
+    body: JSON.stringify({ area: featureCollection }),
   })
   if (!response.ok) {
     console.error('Unable to save to koji', response)
